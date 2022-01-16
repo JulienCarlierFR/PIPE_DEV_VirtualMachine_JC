@@ -15,7 +15,7 @@ CUSTOM_INSTALL_APT=xxxxx  xxx       <= Paquets additionnels pour l'installation
 ##NOTES
 Les étapes ci-dessous sont executées automatiquement dans le Vagrantfile. Aucune action est nécessaire, cette note explique simplement le fonctionnement du logiciel de déploiement.
 
-Nécessite de provisionner les fichiers suivants dans la VM à la racine de : 
+Nécessite de provisionner les fichiers suivants dans la VM à la racine : 
 ./conf_install_vm_debianlocaldev.conf
 ./__install_core.sh
 ./install_desktop.sh

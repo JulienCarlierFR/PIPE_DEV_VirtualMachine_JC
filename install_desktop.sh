@@ -8,7 +8,11 @@ chmod +x ./__install_core.sh
 
 ##  CONFIGURATIONS =========================
 CONF_FILE="conf_install_vm_local-debian-dev.conf"
-CUSTOM_APT="gnome-core"
+#CUSTOM_APT="gnome-core"
+
+## VARIABLES ===============================
+IP=$(hostname -I | awk '{print $2}')
+
 
 
 #   FUNCTIONS CORE ==========================
@@ -43,10 +47,5 @@ echo "Installation Terminé DESKTOP - "$IP
 
 
 
-# ACTION 
-#parseConfFile "USER1_LOGIN"
-#echo $DATA_KEY_GLOBAL
-#echo "------------"
-
-
+echo "REBOOT ! ------------"
 reboot
