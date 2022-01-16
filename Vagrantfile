@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
         sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
         service ssh restart
     SHELL
-    debianlocaldev.vm.provision "file", source: "./conf_install_vm_debianlocaldev.conf", destination: "./"
+    debianlocaldev.vm.provision "file", source: "./conf_install_vm_local-debian-dev.conf", destination: "./"
     debianlocaldev.vm.provision "file", source: "./__install_core.sh", destination: "./"                          #for debug
     debianlocaldev.vm.provision "file", source: "./install_desktop.sh", destination: "./"                         #for debug
 
@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
 
 
 
-    config.vm.define "server-debian-dev" do |serverdebiandev|
+    config.vm.define "debian-server-dev" do |serverdebiandev|
         serverdebiandev.vm.box = "boxomatic/debian-11"
         serverdebiandev.vm.hostname = "debianlocaldev"
         serverdebiandev.vm.box_url = "boxomatic/debian-11"
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
             v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
             v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
             v.customize ["modifyvm", :id, "--memory", 2048]
-            v.customize ["modifyvm", :id, "--name", "server-debian-dev"]
+            v.customize ["modifyvm", :id, "--name", "debian-server-dev"]
             v.customize ["modifyvm", :id, "--cpus", "1"]
             v.gui = false
         end
@@ -62,7 +62,10 @@ Vagrant.configure("2") do |config|
         sed -i 's/ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/g' /etc/ssh/sshd_config    
         service ssh restart
     SHELL
-    serverdebiandev.vm.provision "shell", path: "__install_core.sh"
+    serverdebiandev.vm.provision "file", source: "./conf_install_vm_debianserverdev.conf", destination: "./"
+    serverdebiandev.vm.provision "file", source: "./__install_core.sh", destination: "./"                          #for debug
+    serverdebiandev.vm.provision "file", source: "./install_server.sh", destination: "./"                          #for debug
+
     serverdebiandev.vm.provision "shell", path: "install_server.sh"
     end
 end
